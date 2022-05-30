@@ -2,13 +2,15 @@
 from django.urls import path
 #from base import views as viewbase 
 #from att.views import about
-from .views import about, hello, ok
+from .views import *
 
 urlpatterns = [
 
     path('', about),
     path("hello/", hello),
-    path("ok/", ok)
+    path("ok/", ok),
+    path("home/", home),
+    path("hero/", ravinder)
 
 
 ]

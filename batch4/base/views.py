@@ -10,7 +10,28 @@ def about(request):
 
 
 def hello(request):
-	return HttpResponse("<h1> My second hello </h1>")
+	
+	context = {"name" : "ravinder", "title": "Batch 4"}
+	return render(request, 'base/about.html', context)
 
 def ok(request):
-	return HttpResponse("<h1> ok </h1>")
+	posts =  [
+	{
+	"author" : "Mohit", 	"title" : "Post1",
+	"content" : "Hello everyone this is my first post "
+	},
+		{
+	"author" : "ravinder",
+	"title" : "Post2",
+	"content" : "Hello everyone this is my first post "
+	}
+	]
+	context = {"posts" : posts, }
+	return render(request, "base/data.html", context )
+
+def home(request):
+	return render(request, 'base/base.html')
+
+def ravinder(request):
+	list1 = ["Thor", "ironman", "captain"]
+	return render (request, 'base/heros.html', {"avengers": list1})
