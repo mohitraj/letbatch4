@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
+from .forms  import StudentForm
+from .models import Student
 # Create your views here.
 def about(request):
 	#print (request)
@@ -35,3 +37,20 @@ def home(request):
 def ravinder(request):
 	list1 = ["Thor", "ironman", "captain"]
 	return render (request, 'base/heros.html', {"avengers": list1})
+
+
+def Student1(request):
+	form = StudentForm()
+	context = {"form": form, "legend": "Add your details"}
+
+	if request.method=="POST":
+		form = StudentForm(request.POST)
+		if form.is_valid():
+			d1 = form.cleaned_data
+			u1 = d1.get("UID")
+			n1 = d1.get("stuname")
+			m1 = d1.get("stumail")
+			c1 = d1.get("stuclass")
+			Student.objects.create(stuid=u1,stuname=n1,stumail=m1,stuclass=c1)
+	
+	return render(request,'base/simpleform.html', context )

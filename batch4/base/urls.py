@@ -10,7 +10,8 @@ urlpatterns = [
     path("hello/", hello),
     path("ok/", ok),
     path("home/", home),
-    path("hero/", ravinder)
+    path("hero/", ravinder),
+    path("simpleform/", Student1, name="simpleform")
 
 
 ]

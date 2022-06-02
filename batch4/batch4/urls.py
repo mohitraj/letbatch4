@@ -20,7 +20,8 @@ from base import views as viewbase
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('base/', include('base.urls'))
+    path('base/', include('base.urls')),
+    path('att/', include('att.urls'))
 
 
 ]
