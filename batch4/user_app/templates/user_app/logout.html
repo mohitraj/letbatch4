@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+  <div class="alert alert-info">
+    <strong>Logout Successfully </strong>
+  </div>
+  <h3> <a href="{% url  'login'%}"> Login Again</a>
+
+<h1>{{ user.username }} </h1>
+
+
+{% endblock %}

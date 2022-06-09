@@ -7,15 +7,14 @@
 
 <h1>{{ legend }} </h1>
 
-<form action="" method="POST"> 
+<form action="" method="POST" enctype="multipart/form-data"> 
 	{% csrf_token %}
 
-{{ form|crispy }}
+{{ u_form|crispy }}
+{{ p_form|crispy }}
 
 <input type="submit" value="submit"> 
 
 </div>
 {% endblock %}
-
-
 

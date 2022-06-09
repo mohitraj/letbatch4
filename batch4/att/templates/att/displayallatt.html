@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+
+{% block content %}
+
+
+
+
+
+
+
+
+
+ <table class="table table-dark">
+    <thead>
+      <tr>
+      	<th> S.No</th>
+        <th>UID</th>
+        <th>Name</th>
+         <th>subject Name</th>
+          <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+
+{% for  each in data %}
+  <tr>
+  	
+
+
+  	 <h3 style="color:Tomato;"> <td> {{ forloop.counter }} </td>
+        <td>{{ each.uid }}</td>  
+        <td> {{ each.uid.stuname }}
+         <td>{{ each.subject_name }}</td>  
+          <td>{{ each.date1 }}</td>  
+
+      </h3>
+
+
+       
+{% endfor %}
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+{% endblock %}
