@@ -1,0 +1,28 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+
+
+<link rel="stylesheet" href="{% static 'jquery-confirm.min.css' %}"/>
+
+<link rel="stylesheet" href="{% static 'common.css' %}"/>
+
+
+
+<script src="{% static 'jquery-confirm.min.js' %}"></script>
+
+<script src="{% static 'screen.js' %}"></script>
+
+
+
+{% block content %}
+<section id="feature" class="fullwidth">
+	<div class="container fullwidth">
+		<div class="center fullwidth">
+			<img src="" class="livescreen fullwidth">
+		</div>
+	</div>
+</section>
+{% endblock %}

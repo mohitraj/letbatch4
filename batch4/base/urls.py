@@ -11,7 +11,9 @@ urlpatterns = [
     path("ok/", ok),
     path("home/", home),
     path("hero/", ravinder),
-    path("simpleform/", Student1, name="simpleform")
+    path("simpleform/", Student1, name="simpleform"),
+    #path("live/", live, name="live"),
+    #path('screenfeed/', screenfeed,"screenfeed"),
 
 
 ]

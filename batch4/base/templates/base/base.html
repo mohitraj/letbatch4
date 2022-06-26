@@ -40,17 +40,39 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'one_att'%}">One Att</a>
     </li>
+ <li class="nav-item">
+      <a class="nav-link" href="{% url 'Allposts'%}">All Posts</a>
+    </li>
+
 
         <li class="nav-item">
       <a class="nav-link" href="{% url 'logout'%}">Logout</a>
     </li>
      <li class="nav-item">
   <a class="nav-link" href="{% url 'Updateprofile'%}">Updateprofile </a> </li>
+
+  <li class="nav-item">
+  <a class="nav-link" href="{% url 'Updatepass'%}">Change your password </a> </li>
+
+ <li class="nav-item">
+  <a class="nav-link" href="{% url 'cls-post-create'%}">Create Post cl</a> </li>
+
+   <li class="nav-item">
+  <a class="nav-link" href="{% url 'cls-post-view'%}">All posts cl</a> </li>
+
+
+   <li class="nav-item">
+  <a class="nav-link" href="{% url 'cls-user-post-view'%}">My posts cl</a> </li>
+
 {% else %}
  <li class="nav-item">
  <a class="nav-link" href="{% url 'login'%}">Login</a> </li>
   <li class="nav-item">
   <a class="nav-link" href="{% url 'Register'%}">Register </a> </li>
+
+  <li class="nav-item">
+  <a class="nav-link" href="{% url 'password_reset'%}">Forget Password </a> </li>
+
 
 
   Updateprofile

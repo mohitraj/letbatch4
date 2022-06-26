@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'att.apps.AttConfig',
     'crispy_forms',
-    'user_app.apps.UserAppConfig'
+    'user_app.apps.UserAppConfig',
+    'blog.apps.BlogConfig',
+    'photos.apps.PhotosConfig',
+    'rest_framework',
 
 
 ]
@@ -127,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -150,7 +153,18 @@ STATICFILES_DIRS=[STATIC_DIR]
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
+#LOGIN_URL = '/login/'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_POST= 587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER = 'greatextreme@gmail.com'
+EMAIL_HOST_PASSWORD= 'mgexgnzuvxottlii'
 

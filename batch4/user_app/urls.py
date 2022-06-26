@@ -15,6 +15,7 @@ urlpatterns = [
     path("profile/", Profile, name="profile"),
     path("profile/<int:id1>", Profile_user, name="profile_user"),
     path("update/", Updateprofile, name="Updateprofile"),
+    path("updatepass/", user_change_pass, name="Updatepass"),
 
 
 

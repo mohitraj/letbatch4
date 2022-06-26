@@ -3,7 +3,7 @@ from .forms import StudentMasterForm, StudentAttForm, StudentAttFormDisplay
 from django.shortcuts import render
 from django.contrib import messages 
 import time 
-from .models import Mark_Attendance2
+from .models import Mark_Attendance2, MasterData2
 
 # Create your views here.
 
@@ -70,4 +70,36 @@ def display_attendanceone(request):
 	#context = {"data": posts}
 	return render(request,'att/disform.html',context)
 
+############################################# REST Function API################
+from .serializer import AttSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+import io
 
+def studentdetails(request,pk):
+	try:
+		stu = MasterData2.objects.get(id=pk) # model complex object 
+		serializer = AttSerializer(stu)
+		json_data = JSONRenderer().render(serializer.data)
+		print(json_data)
+	except Exception as e :
+		print (e)
+		json_data = '{"Not get": "NIL"}'
+	return HttpResponse(json_data, content_type='application/json')
+
+@csrf_exempt
+def student_api(request):
+	if request.method=="GET":
+		json_data = request.body  # data from myapp.py
+		stream = io.BytesIO(json_data)
+		pythondata = JSONParser().parse(stream)  # python dictionary 
+		id1  = pythondata.get('id',None)
+		if id1 is not None:
+			print ("id",id1)
+			stu = MasterData2.objects.get(id=id1) # model complex object 
+			serializer = AttSerializer(stu)
+			json_data = JSONRenderer().render(serializer.data)
+			print(json_data)
+			return HttpResponse(json_data, content_type='application/json')  # json reponse 

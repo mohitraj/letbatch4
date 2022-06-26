@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse 
 from .forms  import StudentForm
 from .models import Student
+import json
 # Create your views here.
 def about(request):
 	#print (request)
@@ -12,9 +13,15 @@ def about(request):
 
 
 def hello(request):
-	
 	context = {"name" : "ravinder", "title": "Batch 4"}
 	return render(request, 'base/about.html', context)
+'''
+def live(request):
+	return render(request, 'base/screen.html')
+
+def screenfeed(request):
+    return json.dumps([True, screenlive.gen()])
+'''
 
 def ok(request):
 	posts =  [

@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>Welcome to Gallery</h1>
+
+<form action="" method="POST" enctype="multipart/form-data"> 
+	{% csrf_token %}
+
+{% for fm in form %}
+
+{{ fm.tag_labels }}  {{ fm }} {{ fm.errors }}
+
+{% endfor %}
+<input type="submit" value="submit"> 
+</form>
+
+
+
+
+
+<div class="container">
+
+	<div class="row"> 
+
+	{% for img in galimg %}
+<div class= "col-md-4 col-sm-6">
+<div class="thumbnail border border-secondary">
+	<img src = "{{ img.multipleimages.url }}" height="200">
+	</div>
+	</div> 
+
+{% endfor %}
+</div>
+</div>
+
+
+
+{% endblock %}
