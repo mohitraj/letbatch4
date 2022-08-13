@@ -21,7 +21,8 @@ def Register(request):
 
 @login_required(login_url="login")
 def Profile(request):
-	return render(request, 'user_app/profile.html')
+	context = {"ip": request.META['REMOTE_ADDR']}
+	return render(request, 'user_app/profile.html',context)
 
 
 def Profile_user(request, id1):

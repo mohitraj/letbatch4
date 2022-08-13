@@ -1,0 +1,18 @@
+<html>
+<body>
+<div class="content-section">
+<div class='col-md-6'>
+    <form action="" method="POST">
+    {% csrf_token %}
+
+<div class="alert alert-info">
+    <strong>{{ legend }}  </strong>   </div>
+
+ {{form.as_p}}
+    <input type="submit" value="Submit">
+</form>
+
+
+</body>
+
+</html>

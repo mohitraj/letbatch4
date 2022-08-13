@@ -71,12 +71,13 @@ def display_attendanceone(request):
 	return render(request,'att/disform.html',context)
 
 ############################################# REST Function API################
-from .serializer import AttSerializer
+from .serializer import AttSerializer, AttSerializer1
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import io
+
 
 def studentdetails(request,pk):
 	try:
@@ -103,3 +104,106 @@ def student_api(request):
 			json_data = JSONRenderer().render(serializer.data)
 			print(json_data)
 			return HttpResponse(json_data, content_type='application/json')  # json reponse 
+
+	if request.method=='POST':
+		json_data = request.body  # data from myapp.py
+		stream = io.BytesIO(json_data)
+		pythondata = JSONParser().parse(stream)
+		serial = AttSerializer(data=pythondata)
+		if serial.is_valid():
+			serial.save()
+			res = {'msg': 'Data create'}
+			return JsonResponse(res,safe=False)
+
+		json_data = JSONRenderer().render(serial.error)
+		return HttpResponse(json_data, content_type='application/json')  # json reponse 
+
+	if request.method=='PUT':
+		json_data = request.body  # data from myapp.py
+		stream = io.BytesIO(json_data)
+		pythondata = JSONParser().parse(stream)
+		id1  = pythondata.get('stuid',None)
+		stu = MasterData2.objects.get(stuid=id1)
+		serial = AttSerializer(stu,data=pythondata,partial=True)
+		if serial.is_valid():
+			serial.save()
+			res = {'msg': 'Data updated'}
+			return JsonResponse(res,safe=False)
+
+		json_data = JSONRenderer().render(serial.error)
+		return HttpResponse(json_data, content_type='application/json')
+
+
+	if request.method== 'DELETE':
+		json_data = request.body  # data from myapp.py
+		stream = io.BytesIO(json_data)
+		pythondata = JSONParser().parse(stream)
+		id1  = pythondata.get('stuid',None)
+		stu = MasterData2.objects.get(stuid=id1)
+		stu.delete()
+		res = {'msg': 'Data deleted'}
+		return JsonResponse(res,safe=False)
+
+######################### GENERIC class API #############
+from rest_framework.generics import ListAPIView  # viewing purpose 
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated,IsAdminUser,IsAuthenticatedOrReadOnly, DjangoModelPermissions,DjangoModelPermissionsOrAnonReadOnly
+from .permissions import MohitPermission
+
+class MasterListAPI(ListAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer1
+	authentication_classes = [TokenAuthentication]
+	permission_classes = [IsAuthenticated]
+
+
+
+from rest_framework.generics import CreateAPIView 
+class MasterCreateAPI(CreateAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+
+from rest_framework.generics import RetrieveAPIView 
+class MasterRetrieveAPI(RetrieveAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+
+from rest_framework.generics import UpdateAPIView 
+class MasterUpdateAPI(UpdateAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+
+
+from rest_framework.generics import DestroyAPIView 
+class MasterDestroyAPI(DestroyAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+
+from rest_framework.generics import ListCreateAPIView  # view and create #########3
+class MasterListCreateAPI(ListCreateAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+	#authentication_classes = [BasicAuthentication]
+	authentication_classes =[TokenAuthentication]
+	#permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+	#permission_classes = [IsAuthenticated,MohitPermission]
+	permission_classes = [IsAuthenticated]
+
+
+from rest_framework.generics import RetrieveUpdateAPIView 
+class MasterRetUpdate(RetrieveUpdateAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+
+from rest_framework.generics import RetrieveDestroyAPIView 
+class MasterRetDes(RetrieveDestroyAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+
+from rest_framework.generics import RetrieveUpdateDestroyAPIView 
+class MasterRUD(RetrieveUpdateDestroyAPIView):
+	queryset = MasterData2.objects.all()
+	serializer_class = AttSerializer
+
+
+
